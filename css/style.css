@@ -1,0 +1,14 @@
+#tools {
+    display: flex;
+}
+
+#tools section {
+    border: 2px solid black;
+    width: 33%;
+}
+
+canvas {
+    margin-top: 20px;
+    border: black 5px solid;
+    width: 90%;
+}

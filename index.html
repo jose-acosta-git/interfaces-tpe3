@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo entregable N 2</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <section id="tools">
+        <section id="brush">
+            <button>Pencil</button>
+            <div id="color">
+                <label for="color">Color</label>
+                <input type="color" name="color">
+            </div>
+            <div id="size">
+                <label for="size">Tamaño</label>
+                <input type="range" name="size">
+            </div>
+            <button>Eraser</button>
+        </section>
+    
+        <section id="filter">
+            <button>Negativo</button>
+            <button>Binarización</button>
+            <button>Sepia</button>
+            <div id="brightness">
+                <label for="brightness">Brillo</label>
+                <input type="range" name="brightness">
+            </div>
+        </section>
+    
+        <section id="image">
+            <label for="bg-image">Cargar imagen</label>
+            <input type="file" name="bg-image" id="bg-image">
+            <button>Vaciar imagen</button>
+            <button>Borrar lienzo</button>
+            <button>Guardar</button>
+        </section>
+    </section>
+
+
+    <canvas></canvas>
+    
+</body>
+</html>
