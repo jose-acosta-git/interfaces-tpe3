@@ -2,7 +2,7 @@
     display: flex;
 }
 
-#tools section {
+#tools section, #tools form {
     border: 2px solid black;
     width: 33%;
 }

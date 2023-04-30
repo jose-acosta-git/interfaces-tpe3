@@ -7,6 +7,8 @@ const context = canvas.getContext('2d');
 const colorInput = document.getElementById('colorInput')
 const container = document.getElementById('canvasContainer');
 const sizeInput = document.getElementById('sizeInput');
+const pencilRadio = document.getElementById('pencil');
+const eraserRadio = document.getElementById('eraser');
 
 //Codigo para poder hacer el canvas responsive y evitar que se rompa cuando cambia su tamaño
 canvas.width = container.offsetWidth;
@@ -18,27 +20,32 @@ window.addEventListener('resize', function() {
 })
 
 //Declaracion de variables del a app
-let mouseDown = false;
 let color = colorInput.value;
 let size = sizeInput.value;
-let pencil = null;
-const baseWidth = 35;
+let usingPencil = pencilRadio.checked;
+let mouseDown = false;
+let brush = null;
+const baseWidth = 25;
 
 canvas.addEventListener('mousedown', (e) => {
     mouseDown = true;
-    pencil = new Pencil(e.layerX - canvas.offsetLeft, e.layerY - canvas.offsetTop, color, context, size/baseWidth);
+    if (usingPencil) {
+        brush = new Pencil(e.layerX - canvas.offsetLeft, e.layerY - canvas.offsetTop, color, context, size/baseWidth);
+    } else {
+        brush = new Eraser(e.layerX - canvas.offsetLeft, e.layerY - canvas.offsetTop, context, size/baseWidth);
+    }
 })
 
 canvas.addEventListener('mousemove', (e) => {
     if (mouseDown) {
-        pencil.moveTo(e.layerX - canvas.offsetLeft, e.layerY - canvas.offsetTop);
-        pencil.draw();
+        brush.moveTo(e.layerX - canvas.offsetLeft, e.layerY - canvas.offsetTop);
+        brush.draw();
     }
 })
 
-canvas.addEventListener('mouseup', (e) => {
+canvas.addEventListener('mouseup', () => {
     mouseDown = false;
-    pencil = null;
+    brush = null;
 })
 
 colorInput.addEventListener('input', () => {
@@ -47,10 +54,17 @@ colorInput.addEventListener('input', () => {
 
 sizeInput.addEventListener('change', () => {
     let s = sizeInput.value;
-    console.log(s);
     if (s > 0) {
         size = s;
     } else {
         size = 1/baseWidth;
     }
+})
+
+pencilRadio.addEventListener('change' , () => {
+    usingPencil = true;
+})
+
+eraserRadio.addEventListener('change' , () => {
+    usingPencil = false;
 })

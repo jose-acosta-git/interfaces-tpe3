@@ -10,18 +10,23 @@
 <body>
 
     <section id="tools">
-        <section id="brush">
-            <button>Pencil</button>
-            <div id="color">
-                <label for="color">Color</label>
-                <input type="color" name="color" id="colorInput">
-            </div>
+        <form id="brush">
+            <fieldset>
+                <legend>Brocha</legend>
+                <label for="pencil">Lápiz</label>
+                <input type="radio" name="brush" id="pencil" checked>
+                <label for="eraser">Goma</label>
+                <input type="radio" name="brush" id="eraser">
+            </fieldset>
             <div id="size">
                 <label for="size">Tamaño</label>
                 <input type="range" name="size" id="sizeInput">
             </div>
-            <button>Eraser</button>
-        </section>
+            <div id="color">
+                <label for="color">Color del lápiz</label>
+                <input type="color" name="color" id="colorInput">
+            </div>
+        </form>
     
         <section id="filter">
             <button>Negativo</button>
@@ -46,7 +51,9 @@
         <canvas id="canvas"></canvas>
     </div>
 
+    <script src="js/Brush.js"></script>
     <script src="js/Pencil.js"></script>
+    <script src="js/Eraser.js"></script>
     <script src="js/main.js"></script>
     
 </body>
