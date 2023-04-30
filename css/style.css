@@ -10,5 +10,6 @@
 canvas {
     margin-top: 20px;
     border: black 5px solid;
-    width: 90%;
+    width: 100%;
+    object-fit: contain;
 }

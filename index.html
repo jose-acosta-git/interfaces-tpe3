@@ -14,11 +14,11 @@
             <button>Pencil</button>
             <div id="color">
                 <label for="color">Color</label>
-                <input type="color" name="color">
+                <input type="color" name="color" id="colorInput">
             </div>
             <div id="size">
                 <label for="size">Tamaño</label>
-                <input type="range" name="size">
+                <input type="range" name="size" id="sizeInput">
             </div>
             <button>Eraser</button>
         </section>
@@ -42,8 +42,12 @@
         </section>
     </section>
 
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+    </div>
 
-    <canvas></canvas>
+    <script src="js/Pencil.js"></script>
+    <script src="js/main.js"></script>
     
 </body>
 </html>
