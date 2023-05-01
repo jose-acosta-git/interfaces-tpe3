@@ -7,9 +7,14 @@
     width: 33%;
 }
 
-canvas {
+#canvasContainer {
+    height: 500px;
     margin-top: 20px;
+}
+
+canvas {
     border: black 5px solid;
     width: 100%;
+    height: 100%;
     object-fit: contain;
 }
