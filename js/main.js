@@ -14,7 +14,7 @@ const eraserRadio = document.getElementById('eraser');
 canvas.width = container.offsetWidth;
 canvas.height = container.offsetHeight;
 
-window.addEventListener('resize', function() {
+container.addEventListener('resize', function() {
     canvas.width = container.offsetWidth;
     canvas.height = container.offsetHeight;
 })
