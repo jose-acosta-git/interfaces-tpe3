@@ -3,10 +3,14 @@
 const negative = document.getElementById('negative');
 const binarization = document.getElementById('binarization');
 const sepia = document.getElementById('sepia');
+const brightness = document.getElementById('brightness');
+
+let lastBrightness = 50;
 
 negative.addEventListener('click', applyNegative);
 binarization.addEventListener('click', applyBinarization);
 sepia.addEventListener('click', applySepia);
+brightness.addEventListener('change', changeBrightness);
 
 function applyNegative() {
     //Obtiene los pixeles actualizados del canvas
@@ -67,6 +71,23 @@ function applySepia() {
         data[i + 1] = Math.min(0.349 * red + 0.686 * green + 0.168 * blue, 255);
         data[i + 2] = Math.min(0.272 * red + 0.534 * green + 0.131 * blue, 255);
 
+    }
+    //Actualiza el imageData del canvas
+    context.putImageData(imageData, 0, 0);
+}
+
+//Cambia el brillo del canvas
+function changeBrightness() {
+    let change = 2 * ( brightness.value - lastBrightness);
+    //Obtiene los pixeles actualizados del canvas
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let data = imageData.data;
+    //Recorre los pixeles del canvas de 4 en 4 (el rgba de cada pixel, ya que se guarda en un array de 1 dimension)
+    for (let i=0; i < data.length; i+=4) {
+        //Aumenta o disminuye el valor de cada componente del pixel para cambiar el brillo
+        data[i] += change;
+        data[i+1] += change;
+        data[i+2] += change;
     }
     //Actualiza el imageData del canvas
     context.putImageData(imageData, 0, 0);
