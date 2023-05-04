@@ -8,6 +8,7 @@ class Brush {
         this.context.lineWidth = lineWidth;
     }
 
+    //Dibuja una linea, de color si es lapiz o blanca si es goma
     draw() {
         this.context.beginPath();
         this.context.strokeStyle = this.style;
@@ -17,6 +18,7 @@ class Brush {
         this.context.closePath();
     }
 
+    //Actualiza la posicion del pincel
     moveTo(x, y) {
         this.previousX = this.posX;
         this.previousY = this.posY;
