@@ -13,38 +13,44 @@
         <form id="brush">
             <fieldset>
                 <legend>Brocha</legend>
-                <label for="pencil">Lápiz</label>
+                <label for="pencil">Lápiz 🖌</label>
                 <input type="radio" name="brush" id="pencil" checked>
-                <label for="eraser">Goma</label>
+                <label for="eraser">Goma ⬜</label>
                 <input type="radio" name="brush" id="eraser">
             </fieldset>
-            <div id="size">
-                <label for="size">Tamaño</label>
+            <fieldset>
+                <legend>Tamaño</legend>
                 <input type="range" name="size" id="sizeInput">
-            </div>
-            <div id="color">
-                <label for="color">Color del lápiz</label>
+            </fieldset>
+            <fieldset>  
+                <legend>Color del lápiz</legend>
                 <input type="color" name="color" id="colorInput">
-            </div>
+            </fieldset>
         </form>
     
-        <section id="filter">
-            <button id="negative">Negativo</button>
-            <button id="binarization">Binarización</button>
-            <button id="sepia">Sepia</button>
+        <form id="filter">
+            <fieldset>
+                <legend>Aplicar filtros</legend>
+                <button id="negative">Negativo</button>
+                <button id="binarization">Binarización</button>
+                <button id="sepia">Sepia</button>
+            </fieldset>
             <div>
                 <label for="brightness">Brillo</label>
                 <input type="range" name="brightness" id="brightness">
             </div>
-        </section>
+        </form>
     
-        <section id="image">
-            <label for="bg-image">Cargar imagen</label>
-            <input type="file" name="bg-image" id="bg-image">
-            <button id="reset">Vaciar imagen</button>
-            <button id="clean">Borrar lienzo</button>
-            <button id="save">Guardar</button>
-        </section>
+        <form id="image">
+            <fieldset>
+                <legend>Opciones</legend>
+                <button id="uploadBtn">Cargar IMG</button>
+                <input type="file" name="bg-image" id="uploadInput" hidden>
+                <button id="reset">Restaurar imagen</button>
+                <button id="clean">Borrar lienzo</button>
+                <button id="save">Guardar</button>
+            </fieldset>
+        </form>
     </section>
 
     <canvas id="canvas" width="800px" height="500px"></canvas>

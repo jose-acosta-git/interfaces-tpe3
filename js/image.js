@@ -1,16 +1,23 @@
 /** @type {HTMLCanvasElement} */
 "use strict";
 
-const upload = document.getElementById('bg-image');
+const uploadBtn = document.getElementById('uploadBtn');
+const uploadInput = document.getElementById('uploadInput');
 const reset = document.getElementById('reset');
 const clean = document.getElementById('clean');
 const save = document.getElementById('save');
 let image = null;
 
-const maxWidth = 800;
+const maxWidth = 1000;
 const maxHeigth = 600;
 
-upload.addEventListener('change', (e) => {
+uploadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    uploadInput.click();
+})
+
+uploadInput.addEventListener('change', (e) => {
+    console.log('change');
     if (e.target.files) {
         let img = new Image();
         let file = e.target.files[0];
@@ -48,18 +55,21 @@ upload.addEventListener('change', (e) => {
     }
 })
 
-reset.addEventListener('click', () => {
+reset.addEventListener('click', (e) => {
+    e.preventDefault();
     context.clearRect(0, 0, canvas.width, canvas.height);
     if (image) {
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
     }
 })
 
-clean.addEventListener('click', () => {
+clean.addEventListener('click', (e) => {
+    e.preventDefault();
     context.clearRect(0, 0, canvas.width, canvas.height);
 })
 
-save.addEventListener('click', () => {
+save.addEventListener('click', (e) => {
+    e.preventDefault();
     let link = document.createElement('a');
     link.download = 'canvas.png';
     link.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');

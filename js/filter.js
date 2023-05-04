@@ -7,9 +7,18 @@ const brightness = document.getElementById('brightness');
 
 let lastBrightness = 50;
 
-negative.addEventListener('click', applyNegative);
-binarization.addEventListener('click', applyBinarization);
-sepia.addEventListener('click', applySepia);
+negative.addEventListener('click', (e) => {
+    e.preventDefault();
+    applyNegative();
+});
+binarization.addEventListener('click', (e) => {
+    e.preventDefault();
+    applyBinarization();
+});
+sepia.addEventListener('click', (e) => {
+    e.preventDefault();
+    applySepia();
+});
 brightness.addEventListener('change', changeBrightness);
 
 function applyNegative() {

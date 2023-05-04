@@ -1,13 +1,39 @@
+html {height: 100%;}
+
+body {
+    background-image: linear-gradient(#FFD2AA, #552800);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 #tools {
     display: flex;
 }
 
-#tools section, #tools form {
-    border: 2px solid black;
+#tools form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    flex-wrap: wrap;
     width: 33%;
+}
+
+#tools div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#filter, #image {
+    border-left: 2px solid black;
+}
+
+button {
+    font-size: 15px;    
 }
 
 canvas {
     border: black 5px solid;
     margin-top: 20px;
+    background-color: white;
 }
