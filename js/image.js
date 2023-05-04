@@ -17,8 +17,8 @@ uploadBtn.addEventListener('click', (e) => {
 })
 
 uploadInput.addEventListener('change', (e) => {
-    console.log('change');
     if (e.target.files) {
+        //Utiliza una nueva instancia para que se reestablescan automaticamente las dimensiones
         let img = new Image();
         let file = e.target.files[0];
         
@@ -65,6 +65,7 @@ reset.addEventListener('click', (e) => {
 
 clean.addEventListener('click', (e) => {
     e.preventDefault();
+    image = null;
     context.clearRect(0, 0, canvas.width, canvas.height);
 })
 

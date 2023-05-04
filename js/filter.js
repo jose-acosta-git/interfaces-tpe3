@@ -3,9 +3,11 @@
 const negative = document.getElementById('negative');
 const binarization = document.getElementById('binarization');
 const sepia = document.getElementById('sepia');
+const saturation = document.getElementById('saturation');
 const brightness = document.getElementById('brightness');
 
-let lastBrightness = 50;
+const defaultBrightness = brightness.value;
+const defaultSaturation = saturation.value;
 
 negative.addEventListener('click', (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ sepia.addEventListener('click', (e) => {
     e.preventDefault();
     applySepia();
 });
+saturation.addEventListener('change', changeSaturation);
 brightness.addEventListener('change', changeBrightness);
 
 function applyNegative() {
@@ -87,7 +90,10 @@ function applySepia() {
 
 //Cambia el brillo del canvas
 function changeBrightness() {
-    let change = 2 * ( brightness.value - lastBrightness);
+    //Restaura la imagen a su estado original
+    reset.click();
+    //Calcula la intensidad del brillo
+    let change = 2 * ( brightness.value - defaultBrightness);
     //Obtiene los pixeles actualizados del canvas
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let data = imageData.data;
@@ -97,6 +103,32 @@ function changeBrightness() {
         data[i] += change;
         data[i+1] += change;
         data[i+2] += change;
+    }
+    //Actualiza el imageData del canvas
+    context.putImageData(imageData, 0, 0);
+}
+
+function changeSaturation() {
+    reset.click();
+    // Calcula la intensidad de la saturación
+    let change = 0.25 * (saturation.value - defaultSaturation);
+    //Obtiene los pixeles actualizados del canvas
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let data = imageData.data;
+    //Recorre los pixeles del canvas de 4 en 4 (el rgba de cada pixel, ya que se guarda en un array de 1 dimension)
+    for (let i=0; i < data.length; i+=4) {
+        //Guarda el valor rojo, verde y azul de cada pixel
+        let red = data[i];
+        let green = data[i+1];
+        let blue = data[i+2];
+
+        // Calcula la luminosidad del pixel
+        let lum = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+
+        // Calcular los nuevos valores de los componentes rojo, verde y azul
+        data[i] = lum + change * (red - lum);
+        data[i+1] = lum + change * (green - lum);
+        data[i+2] = lum + change * (blue - lum);
     }
     //Actualiza el imageData del canvas
     context.putImageData(imageData, 0, 0);
