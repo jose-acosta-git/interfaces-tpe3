@@ -26,19 +26,13 @@ sepia.addEventListener('click', (e) => {
     applyFilter('sepia');
 });
 brightness.addEventListener('change', () => {
-    //Restaura la imagen a su estado original
-    reset.click();
-
     //Calcula la intensidad del brillo
-    let change = 2 * ( brightness.value - defaultBrightness);
+    let change = 5 * ( brightness.value - defaultBrightness );
     applyFilter('bright', change);
 });
 saturation.addEventListener('change', () => {
-    //Restaura la imagen a su estado original
-    reset.click();
-
     // Calcula la intensidad de la saturación
-    let change = 0.25 * (saturation.value - defaultSaturation);
+    let change = saturation.value - defaultSaturation ;
     applyFilter('saturation', change);
 });
 blur.addEventListener('change', applyBlur);
@@ -131,14 +125,9 @@ function changeSaturation(data, red, green, blue, i, change) {
 }
 
 function applyBlur() {
-    //Restaura la imagen a su estado original
-    reset.click();
-
     // Calcula la intensidad de la difuminación
     let radius = blur.value;
     if(radius == 0) return;
-
-    console.log(radius);
 
     //Obtiene los pixeles actualizados del canvas
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);

@@ -62,6 +62,7 @@ uploadInput.addEventListener('change', (e) => {
             context.drawImage(img, 0, 0, img.width, img.height);
             //Guarda la instancia de la imagen
             image = img;
+            resetFilters();
         }
     }
 })
@@ -73,6 +74,7 @@ reset.addEventListener('click', (e) => {
     if (image) {
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
     }
+    resetFilters();
 })
 
 //Vacia el canvas y elimina la instancia de imagen
@@ -80,6 +82,7 @@ clean.addEventListener('click', (e) => {
     e.preventDefault();
     image = null;
     context.clearRect(0, 0, canvas.width, canvas.height);
+    resetFilters();
 })
 
 //Descarga el canvas en forma de imagen
@@ -90,3 +93,10 @@ save.addEventListener('click', (e) => {
     link.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
     link.click();
 })
+
+//Resetea los inputs de brillo, saturacion y blur
+function resetFilters() {
+    brightness.value = defaultBrightness;
+    saturation.value = defaultSaturation;
+    blur.value = 0;
+}
