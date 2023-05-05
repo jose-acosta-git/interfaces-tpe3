@@ -5,6 +5,7 @@ const negative = document.getElementById('negative');
 const binarization = document.getElementById('binarization');
 const sepia = document.getElementById('sepia');
 const saturation = document.getElementById('saturation');
+const blur = document.getElementById('blur');
 const brightness = document.getElementById('brightness');
 
 //Establece los valores por defecto de brillo y saturacion
@@ -40,6 +41,7 @@ saturation.addEventListener('change', () => {
     let change = 0.25 * (saturation.value - defaultSaturation);
     applyFilter('saturation', change);
 });
+blur.addEventListener('change', applyBlur);
 
 //Aplica el filtro que se indique por parametro
 function applyFilter(filter, change = null) {
@@ -126,4 +128,61 @@ function changeSaturation(data, red, green, blue, i, change) {
     data[i] = lum + change * (red - lum);
     data[i+1] = lum + change * (green - lum);
     data[i+2] = lum + change * (blue - lum);
+}
+
+function applyBlur() {
+    //Restaura la imagen a su estado original
+    reset.click();
+
+    // Calcula la intensidad de la difuminación
+    let radius = blur.value;
+    if(radius == 0) return;
+
+    console.log(radius);
+
+    //Obtiene los pixeles actualizados del canvas
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let data = imageData.data;
+
+    //Define variables necesarias para el funcionamiento del filtro
+    let matrixSize = radius * 2 + 1;
+    let matrix = [];
+    let scale = 1 / (matrixSize * matrixSize);
+
+    //Crea la matriz de convolución con valores iguales para un efecto de blur
+    for (let i = 0; i < matrixSize; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < matrixSize; j++) {
+          matrix[i][j] = scale;
+        }
+    }
+
+    //Realiza la convolución
+    let half = Math.floor(matrixSize / 2);
+    for (let y = 0; y < canvas.height; y++) {
+        for(let x = 0; x < canvas.width; x++) {
+            let index = (y * canvas.width + x) * 4;
+            let r = 0, g = 0, b = 0, a = 0;
+            for (let i = 0; i < matrixSize; i++) {
+                for (let j = 0; j < matrixSize; j++) {
+                    let xIndex = x + j - half;
+                    let yIndex = y + i - half;
+                    if (xIndex >= 0 && xIndex < canvas.width && yIndex >= 0 && yIndex < canvas.height) {
+                        let matrixValue = matrix[i][j];
+                        let dataIndex = (yIndex * canvas.width + xIndex) * 4;
+                        r += data[dataIndex] * matrixValue;
+                        g += data[dataIndex + 1] * matrixValue;
+                        b += data[dataIndex + 2] * matrixValue;
+                        a += data[dataIndex + 3] * matrixValue;
+                      }
+                }
+            }
+            data[index] = r;
+            data[index + 1] = g;
+            data[index + 2] = b;
+            data[index + 3] = a;      
+        }
+    }
+    //Aplica los cambios en el canvas
+    context.putImageData(imageData, 0, 0);
 }
