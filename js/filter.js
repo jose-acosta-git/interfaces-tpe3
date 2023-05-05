@@ -41,6 +41,7 @@ saturation.addEventListener('change', () => {
     applyFilter('saturation', change);
 });
 
+//Aplica el filtro que se indique por parametro
 function applyFilter(filter, change = null) {
     //Obtiene los pixeles actualizados del canvas
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
