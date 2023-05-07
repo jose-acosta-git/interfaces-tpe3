@@ -5,6 +5,7 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
+
                         /* BOTONES Y FUNCIONALIDADES DEL MANEJO DE LAS IMAGENES */
 
 //Elementos del HTML para el manejo de las imagenes
@@ -52,3 +53,39 @@ save.addEventListener('click', (e) => {
 
                         /* BOTONES Y FUNCIONALIDADES DEL MANEJO DE LOS FILTROS */
 
+//Elementos del HTML
+const negative = document.getElementById('negative');
+const binarization = document.getElementById('binarization');
+const sepia = document.getElementById('sepia');
+const saturation = document.getElementById('saturation');
+const blur = document.getElementById('blur');
+const brightness = document.getElementById('brightness');
+
+//Establece los valores por defecto de brillo y saturacion
+const defaultBrightness = brightness.value;
+const defaultSaturation = saturation.value;
+
+//Escucha eventos de los botones y los input de tipo radio
+negative.addEventListener('click', (e) => {
+    e.preventDefault();
+    img.applyFilter('negative');
+});
+binarization.addEventListener('click', (e) => {
+    e.preventDefault();
+    img.applyFilter('binarization');
+});
+sepia.addEventListener('click', (e) => {
+    e.preventDefault();
+    img.applyFilter('sepia');
+});
+brightness.addEventListener('change', () => {
+    //Calcula la intensidad del brillo
+    let change = 5 * ( brightness.value - defaultBrightness );
+    img.applyFilter('bright', change);
+});
+saturation.addEventListener('change', () => {
+    // Calcula la intensidad de la saturación
+    let change = saturation.value - defaultSaturation ;
+    img.applyFilter('saturation', change);
+});
+blur.addEventListener('change', () => { img.applyBlur() });
