@@ -174,6 +174,9 @@ class Img {
         data[i+2] = lum + change * (blue - lum);
     }
 
+    /*Aplica un efecto de difuminacion a la imagen del canvas.
+    Este efecto se logra al promediar los valores de los pixeles vecinos para obtener un nuevo valor para cada pixel de la imagen
+    */
     applyBlur() {
         // Calcula la intensidad de la difuminación
         let radius = blur.value;
